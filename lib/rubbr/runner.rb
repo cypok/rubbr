@@ -44,7 +44,7 @@ module Rubbr
           verbose_messages = /^(Overfull \\hbox|Underfull \\hbox)/
 
           run = `#@executable #@input_file`
-          lines = run.split("\n")
+          lines = run.encode('UTF-8', :invalid => :replace, :undef => :replace).split("\n")
           @warnings = lines.grep(messages).sort.uniq
 
           if Rubbr.options[:verboser]
